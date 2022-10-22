@@ -82,7 +82,7 @@
 
       <!-- btnAllFilms -->
       <div>
-        <button class="btn btnAllFilms">Todos os Filmes</button>
+        <router-link to="/allfilms" class="btn btnAllFilms">Todos os Filmes</router-link>
       </div>
     </div>
   </div>
