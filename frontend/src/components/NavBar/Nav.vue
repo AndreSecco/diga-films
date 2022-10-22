@@ -10,13 +10,16 @@
       /></router-link>
       <div class="linksMenu">
         <router-link class="linkNavbar" to="/">Início</router-link>
-        <router-link class="linkNavbar" to="/tags">Tags</router-link>
-        <router-link class="linkNavbar" to="/films"
+        <router-link class="linkNavbar" to="/alltags">Tags</router-link>
+        <router-link class="linkNavbar" to="/allfilms"
           >Todos os Filmes</router-link
         >
         <router-link class="linkNavbar" to="/login">Entrar</router-link>
         <router-link class="linkNavbar" to="/register"
           >Registrar-se</router-link
+        >
+        <router-link class="linkNavbar" to="/account"
+          >Painel</router-link
         >
       </div>
     </div>
