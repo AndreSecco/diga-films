@@ -1,72 +1,126 @@
 <template>
-  <body class="text-center">
-    <main class="form-signin w-50 m-auto">
+  <body class="text-center bodyLogin">
+    <main class="form-signin w-50 mainLogin m-auto">
       <form @submit.stop.prevent="submit">
-        <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
-
+        <p class="subTitleLogin">ACESSE SUA CONTA</p>
+        <h1 class="h3 mb-3 titleLogin">Faça o Login</h1>
+        <p class="descriptionLogin">
+          Insira seu e-mail e senha para ter acesso<br />ao todos os filmes e ao
+          painel de cadsatros
+        </p>
         <div class="form-floating">
           <input
             v-model="email"
             type="email"
-            class="form-control"
+            class="form-control inputLogin"
             id="floatingInput"
-            placeholder="name@example.com"
+            placeholder="Seu E-mail"
           />
-          <label for="floatingInput">Email address</label>
+          <label for="floatingInput">E-mail</label>
         </div>
         <div class="form-floating">
           <input
             v-model="password"
             type="password"
-            class="form-control"
+            class="form-control inputLogin"
             id="floatingPassword"
             placeholder="Password"
           />
-          <label for="floatingPassword">Password</label>
+          <label for="floatingPassword">Senha</label>
         </div>
 
-        <button class="w-100 btn btn-lg btn-primary" type="submit">
-          Sign in
+        <button class="btnLogin btn btn-lg" type="submit">
+          Entrar
         </button>
-        <p class="mt-5 mb-3 text-muted">&copy; 2017–2022</p>
+
       </form>
+      <div class="w-100 d-flex mt-4" style="justify-content: left">
+        <router-link class="linksLogin" to="/register">Realizar Cadastro</router-link>
+      </div>
     </main>
   </body>
 </template>
 <script>
-import Cookie from 'js-cookie';
+import Cookie from "js-cookie";
 
 export default {
   name: "LoginComponent",
-  data(){
-    return{
-        email: '',
-        password: ''
-    }
+  data() {
+    return {
+      email: "",
+      password: "",
+    };
   },
 
-  methods:{
-    async submit(){
-        const payLoad = {
-            email: this.email,
-            password: this.password
-        };
+  methods: {
+    async submit() {
+      const payLoad = {
+        email: this.email,
+        password: this.password,
+      };
 
-        const req = await fetch('http://127.0.0.1:8000/api/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-            body: JSON.stringify(payLoad)
-        })
-        const data = await req.json()
-        Cookie.set('token', data.access_token)
-    }
-  }
+      const req = await fetch("http://127.0.0.1:8000/api/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(payLoad),
+      });
+      const data = await req.json();
+      Cookie.set("token", data.access_token);
+    },
+  },
 };
 </script>
 <style>
+.linksLogin{
+  text-decoration: none;
+    color: #141414;
+}
+.btnLogin{
+  width: 40%!important;
+    background: #ffffff96;
+    border: 1px solid #141414;
+    color: #141414;
+}
+.btnLogin:hover{
+  color: #fff;
+    background: #141414;
+}
+.inputLogin{
+  padding: 1rem 0.75rem;
+    background: #0000003b;
+    margin: 16px 0px;
+}
+.titleLogin{
+  font-weight: bold;
+    font-size: 45px;
+    margin-top: -10px;
+}
+.mainLogin {
+  background: #ffffffcf;
+  padding: 100px;
+  border-radius: 25px;
+}
+.mainLogin {
+  background: #ffffffcf;
+    padding: 70px 70px;
+    border-radius: 25px;
+}
+.bodyLogin {
+  height: 120vh;
+  align-items: center;
+  background-image: linear-gradient(
+      0deg,
+      rgb(20 20 20 / 70%) 9%,
+      rgb(0 0 0 / 70%) 54%
+    ),
+    url(@/assets/Films/Banner03.jpg);
+  display: flex;
+  background-position: center;
+  background-size: cover;
+}
 .bd-placeholder-img {
   font-size: 1.125rem;
   text-anchor: middle;
