@@ -68,7 +68,7 @@ const routes = [
     component: NewFilmView
   },
   {
-    path:'/account/updatefilm',
+    path:'/account/updatefilm/:idFilm',
     name: 'updatefilm',
     component: UpdateFilmView
   },
