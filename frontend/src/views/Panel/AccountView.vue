@@ -20,7 +20,7 @@
           />
           <label for="floatingInput">E-mail</label>
         </div>
-        <div class="form-floating">
+        <!-- <div class="form-floating">
           <input
             v-model="password"
             type="password"
@@ -29,19 +29,40 @@
             placeholder="Password"
           />
           <label for="floatingPassword">Senha</label>
-        </div>
+        </div> -->
       </div>
       <div class="w-100 footerAccount">
-        <button class="btn btnAccountExit col-2">Sair</button>
+        <button class="btn btnAccountExit col-2" @click="exitSystem()">Sair</button>
       </div>
     </div>
   </div>
 </template>
 <script>
 import SideBarComponent from "@/components/SideBar/SideBarComponent.vue";
+import Cookie from "js-cookie";
 export default {
   name: "AccountView",
+  data(){
+    return{
+      email: ''
+    }
+  },
   components: { SideBarComponent },
+  methods:{
+    exitSystem(){
+      Cookie.remove('name')
+      Cookie.remove('idUser')
+      Cookie.remove('token')
+      window.location = '/'
+    },
+
+    fillUserInf(){
+      this.email = Cookie.get('email')
+    }
+  },
+  created(){
+    this.fillUserInf()
+  }
 };
 </script>
 <style>

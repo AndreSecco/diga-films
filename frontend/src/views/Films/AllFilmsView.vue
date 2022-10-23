@@ -35,7 +35,7 @@
   </div>
 </template>
 <script>
-import BannerComponent from "@/components/Home/BannerComponent.vue";
+import BannerComponent from "@/components/BannerComponent.vue";
 export default {
   name: "AllFilmsView",
   components: { BannerComponent },

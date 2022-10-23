@@ -29,13 +29,12 @@
           <label for="floatingPassword">Senha</label>
         </div>
 
-        <button class="btnLogin btn btn-lg" type="submit">
-          Entrar
-        </button>
-
+        <button class="btnLogin btn btn-lg" type="submit">Entrar</button>
       </form>
       <div class="w-100 d-flex mt-4" style="justify-content: left">
-        <router-link class="linksLogin" to="/register">Realizar Cadastro</router-link>
+        <router-link class="linksLogin" to="/register"
+          >Realizar Cadastro</router-link
+        >
       </div>
     </main>
   </body>
@@ -68,35 +67,48 @@ export default {
         body: JSON.stringify(payLoad),
       });
       const data = await req.json();
-      Cookie.set("token", data.access_token);
+      if (data.error == "Unauthorized") {
+        alert("Usuário ou/e senha inválida");
+      } else {
+        Cookie.set("token", data.access_token);
+        this.logged = true
+        const reqUser = await fetch(`http://127.0.0.1:8000/api/listUserLine/${this.email}`)
+        const dataUser = await reqUser.json()
+        console.log(dataUser)
+        Cookie.set('name', dataUser.name)
+        Cookie.set('idUser', dataUser.id)
+        Cookie.set('email', dataUser.email)
+
+        window.location = '/'
+      }
     },
   },
 };
 </script>
 <style>
-.linksLogin{
+.linksLogin {
   text-decoration: none;
-    color: #141414;
+  color: #141414;
 }
-.btnLogin{
-  width: 40%!important;
-    background: #ffffff96;
-    border: 1px solid #141414;
-    color: #141414;
+.btnLogin {
+  width: 40% !important;
+  background: #ffffff96;
+  border: 1px solid #141414;
+  color: #141414;
 }
-.btnLogin:hover{
+.btnLogin:hover {
   color: #fff;
-    background: #141414;
+  background: #141414;
 }
-.inputLogin{
+.inputLogin {
   padding: 1rem 0.75rem;
-    background: #0000003b;
-    margin: 16px 0px;
+  background: #0000003b;
+  margin: 16px 0px;
 }
-.titleLogin{
+.titleLogin {
   font-weight: bold;
-    font-size: 45px;
-    margin-top: -10px;
+  font-size: 45px;
+  margin-top: -10px;
 }
 .mainLogin {
   background: #ffffffcf;
@@ -105,8 +117,8 @@ export default {
 }
 .mainLogin {
   background: #ffffffcf;
-    padding: 70px 70px;
-    border-radius: 25px;
+  padding: 70px 70px;
+  border-radius: 25px;
 }
 .bodyLogin {
   height: 120vh;

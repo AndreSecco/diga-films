@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <BannerComponent />
+    <BannerHomeComponent />
     <CategoriesComponent />
     <FilmsComponent />
   </div>
@@ -8,16 +8,16 @@
 
 <script>
 // @ is an alias to /src
-import BannerComponent from "@/components/Home/BannerComponent.vue";
 import CategoriesComponent from "@/components/Home/CategoriesComponent.vue";
 import FilmsComponent from "@/components/Home/FilmsComponent.vue";
+import BannerHomeComponent from "@/components/Home/BannerHomeComponent.vue";
 
 export default {
   name: "HomeView",
   components: {
-    BannerComponent,
     CategoriesComponent,
-    FilmsComponent
+    FilmsComponent,
+    BannerHomeComponent
 },
 };
 </script>
