@@ -14,11 +14,11 @@
         <router-link class="linkNavbar" to="/allfilms"
           >Todos os Filmes</router-link
         >
-        <router-link class="linkNavbar" to="/login">Entrar</router-link>
-        <router-link class="linkNavbar" to="/register"
+        <router-link class="linkNavbar" to="/login" v-show="!logado">Entrar</router-link>
+        <router-link class="linkNavbar" to="/register" v-show="!logado"
           >Registrar-se</router-link
         >
-        <router-link class="linkNavbar" to="/account"
+        <router-link v-show="logado" class="linkNavbar" to="/account"
           >Painel</router-link
         >
       </div>
@@ -26,8 +26,26 @@
   </div>
 </template>
 <script>
+import Cookie from 'js-cookie'
 export default {
   name: "NavBarComponent",
+
+  data() {
+    return {
+      logado: false
+    };
+  },
+  methods: {
+    // Validar se usuário está logado pelo cookie
+    validatePanel() {
+      if (Cookie.get("token")) {
+        this.logado = true;
+      }
+    }
+  },
+  created(){
+    this.validatePanel()
+  }
 };
 </script>
 <style>
