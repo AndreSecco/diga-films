@@ -24,6 +24,10 @@ class User extends Authenticatable implements JWTSubject
         'password',
     ];
 
+    public function userLine($user){
+        return $this->where('email', $user)->first();
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *
