@@ -32,6 +32,7 @@ class FilmController extends Controller
     public function editFilm(Film $id, Request $request)
     {
         return response()->json($id);
+        
     }
 
     public function updateFilm(Film $id, Request $request)
