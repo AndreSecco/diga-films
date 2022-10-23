@@ -3,121 +3,136 @@
     <main class="form-signin w-50 mainLogin m-auto">
       <form @submit.stop.prevent="submit">
         <p class="subTitleLogin">REGISTRE-SE</p>
-        <h1 class="h3 mb-3 titleLogin">Faça seu<br>Cadastro</h1>
+        <h1 class="h3 mb-3 titleLogin">Faça seu<br />Cadastro</h1>
         <p class="descriptionLogin">
-          Insira seu e-mail e senha para ter acesso<br>
+          Insira seu e-mail e senha para ter acesso<br />
           ao todos os filmes e ao painel de cadsatros
         </p>
         <div class="form-floating">
           <input
-            v-model="nome"
-            type="nome"
+            v-model="name"
+            type="name"
             class="form-control inputLogin"
-            id="floatingInput"
+            id="nameInput"
             placeholder="Insira seu nome"
           />
-          <label for="floatingInput">Nome</label>
+          <label for="nameInput">Nome</label>
         </div>
         <div class="form-floating">
           <input
             v-model="email"
             type="email"
             class="form-control inputLogin"
-            id="floatingInput"
+            id="emailInput"
             placeholder="Seu E-mail"
           />
-          <label for="floatingInput">E-mail</label>
+          <label for="emailInput">E-mail</label>
         </div>
         <div class="form-floating">
           <input
             v-model="password"
-            type="password"
+            type="text"
             class="form-control inputLogin"
-            id="floatingPassword"
+            id="passworInput"
             placeholder="Insira sua Senha"
           />
-          <label for="floatingPassword">Senha</label>
+          <label for="passworInput">Senha</label>
         </div>
         <div class="form-floating">
           <input
             v-model="confirmPassword"
             type="confirmPassword"
             class="form-control inputLogin"
-            id="floatingPassword"
+            id="confirmPassword"
             placeholder="Password"
           />
-          <label for="floatingPassword">Confirme sua Senha</label>
+          <label for="confirmPassword">Confirme sua Senha</label>
         </div>
 
-        <button class="btnLogin btn btn-lg" type="submit">
+        <button class="btnLogin btn btn-lg" @click="addUser()">
           Cadastrar
         </button>
       </form>
       <div class="w-100 d-flex mt-4" style="justify-content: left">
-        <router-link class="linksLogin" to="/login">Já Possuo Cadastro</router-link>
+        <router-link class="linksLogin" to="/login"
+          >Já Possuo Cadastro</router-link
+        >
       </div>
     </main>
   </body>
 </template>
 <script>
 import Cookie from "js-cookie";
+import axios from "axios";
+import router from "@/router";
 
 export default {
   name: "LoginComponent",
   data() {
     return {
+      name: "",
       email: "",
       password: "",
-      nome: ""
+      confirmPassword: "",
     };
   },
 
   methods: {
-    async submit() {
-      const payLoad = {
-        email: this.email,
-        password: this.password,
-      };
+    validatePassword() {
+      if (this.password == this.confirmPassword) {
+        return true;
+      } else {
+        return false;
+      }
+    },
 
-      const req = await fetch("http://127.0.0.1:8000/api/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify(payLoad),
-      });
-      const data = await req.json();
-      Cookie.set("token", data.access_token);
+    async addUser() {
+      if (this.validatePassword()) {
+        var data = {
+          name: this.name,
+          email: this.email,
+          password: this.password,
+        };
+        try {
+          const req = await axios.post(
+            "http://127.0.0.1:8000/api/adduser",
+            data
+          );
+          router.push("login");
+        } catch (e) {
+          alert("E-mail já cadastrado");
+        }
+      } else {
+        alert("Insira as duas senhas iguais");
+      }
     },
   },
 };
 </script>
 <style>
-.linksLogin{
+.linksLogin {
   text-decoration: none;
-    color: #141414;
+  color: #141414;
 }
-.btnLogin
-{
-  width: 40%!important;
-    background: #ffffff96;
-    border: 1px solid #141414;
-    color: #141414;
+.btnLogin {
+  width: 40% !important;
+  background: #ffffff96;
+  border: 1px solid #141414;
+  color: #141414;
 }
-.btnLogin:hover{
+.btnLogin:hover {
   color: #fff;
-    background: #141414;
+  background: #141414;
 }
-.inputLogin{
+.inputLogin {
   padding: 1rem 0.75rem;
-    background: #0000003b;
-    margin: 16px 0px;
+  background: #0000003b;
+  margin: 16px 0px;
 }
-.titleLogin{
+.titleLogin {
   font-weight: bold;
-    font-size: 45px;
-    margin-top: -10px;
+  font-size: 45px;
+  margin-top: -10px;
 }
 .mainLogin {
   background: #ffffffcf;
@@ -126,8 +141,8 @@ export default {
 }
 .mainLogin {
   background: #ffffffcf;
-    padding: 30px 70px;
-    border-radius: 25px;
+  padding: 30px 70px;
+  border-radius: 25px;
 }
 .bodyLogin {
   height: 120vh;

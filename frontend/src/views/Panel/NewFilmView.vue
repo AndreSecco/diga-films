@@ -6,7 +6,7 @@
         <div class="titleNewFilm col-7">
           <h1>Inserir Novo Filme</h1>
         </div>
-        <button class="btn btnAccount col-2">Salvar</button>
+        <button class="btn btnAccount col-2" @click="addFilm()">Salvar</button>
         <router-link class="btn btnAccount btnNewFilm col-2" to="/account/films"
           >Cancelar</router-link
         >
@@ -80,6 +80,7 @@
 </template>
   <script>
 import SideBarComponent from "@/components/SideBar/SideBarComponent.vue";
+import router from "@/router";
 export default {
   name: "NewFilmView",
   components: { SideBarComponent },
@@ -93,6 +94,39 @@ export default {
       tagsFilm: [],
     };
   },
+  methods:{
+    validateFilm(){
+      if(!this.nameFilm){
+        alert("Insira o nome do Filme")
+      }else if(!this.fileFilm){
+        alert("Insira um arquivo")
+      } else {
+        return true
+      }
+    },
+
+    async addFilm(){
+      if(this.validateFilm()){
+        let data = {
+          nameFilm: this.nameFilm,
+          fileFilm: this.fileFilm,
+          sizeFilm: this.sizeFilm,
+          imgFilm: this.imgFilm,
+          description: this.descriptionFilm,
+          tagsFilm: this.tagsFilm
+        }
+        try{
+          const req = await axios.post(
+          'http://127.0.0.1:8000/api/addfilm',
+          data
+          )
+          router.push("films")
+        }catch(e){
+
+        }
+      }
+    }
+  }
 };
 </script>
   <style>
