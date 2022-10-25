@@ -5,66 +5,40 @@
       <div class="containerFilms">
         <h2 class="tittleFilms">Filmes Populares</h2>
         <div class="row">
-          <div v-for="film in listFilms" :key="film.idFilm" class="container row mt-3">
-            <div class="itemFilm">
-              <p>{{ film.nameFilm }}</p>
+          <div
+            v-for="film in listFilms"
+            :key="film.idFilm"
+            class="container row mt-3"
+            
+          >
+            <div class="itemFilm" :style="`background-image:linear-gradient(0deg, rgb(20 20 20 / 66%) 17%, rgb(0 0 0 / 64%) 54%), url(http://127.0.0.1:8000/storage/imgFilms/${film.imgFilm}`">
+              <router-link class="linkFilm" :to="'/singlefilm/' + film.id">{{
+                film.nameFilm
+              }}</router-link>
             </div>
           </div>
         </div>
       </div>
       <!-- Films Category Comédia -->
       <div class="containerFilms">
-        <h2 class="tittleFilms">Comédia</h2>
+        <h2 class="tittleFilms">Preferidos</h2>
         <div class="row">
-          <div class="container row mt-3">
-            <div class="itemFilm">
-              <p>O senhor dos anéis</p>
-            </div>
-          </div>
-          <div class="container row mt-3">
-            <div class="itemFilm">
-              <p>O senhor dos anéis</p>
-            </div>
-          </div>
-          <div class="container row mt-3">
-            <div class="itemFilm">
-              <p>O senhor dos anéis</p>
-            </div>
-          </div>
-          <div class="container row mt-3">
-            <div class="itemFilm">
-              <p>O senhor dos anéis</p>
+          <div
+            v-for="film in listFilmPrefer"
+            :key="film.idFilm"
+            class="container row mt-3"
+          >
+            <div
+              class="itemFilm"
+              :style="`background-image:linear-gradient(0deg, rgb(20 20 20 / 66%) 17%, rgb(0 0 0 / 64%) 54%), url(http://127.0.0.1:8000/storage/imgFilms/${film.imgFilm}`"
+            >
+              <router-link class="linkFilm" :to="'/singlefilm/' + film.id">{{
+                film.nameFilm
+              }}</router-link>
             </div>
           </div>
         </div>
       </div>
-      <!-- Films Category Aventura -->
-      <div class="containerFilms">
-        <h2 class="tittleFilms">Aventura</h2>
-        <div class="row">
-          <div class="container row mt-3">
-            <div class="itemFilm">
-              <p>O senhor dos anéis</p>
-            </div>
-          </div>
-          <div class="container row mt-3">
-            <div class="itemFilm">
-              <p>O senhor dos anéis</p>
-            </div>
-          </div>
-          <div class="container row mt-3">
-            <div class="itemFilm">
-              <p>O senhor dos anéis</p>
-            </div>
-          </div>
-          <div class="container row mt-3">
-            <div class="itemFilm">
-              <p>O senhor dos anéis</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
       <!-- btnAllFilms -->
       <div>
         <router-link to="/allfilms" class="btn btnAllFilms"
@@ -80,37 +54,33 @@ export default {
   data() {
     return {
       listFilms: [],
-      idFilm: '',
+      idFilm: "",
       nameFilm: "",
+      listFilmPrefer: [],
     };
   },
   methods: {
-    async getFilms() {},
+    async getFilms() {
+      const reqFilms = await fetch(`http://127.0.0.1:8000/api/films`);
+      const dataFilms = await reqFilms.json();
+      for (let i = 0; i < 4; i++) {
+        this.listFilms.push(dataFilms[i]);
+      }
+      for (let index = 0; index <= 6; index++) {
+        this.listFilmPrefer.push(dataFilms[index]);
+      }
+    },
   },
   created() {
-    this.listFilms = [
-      {
-        idFilm: 1,
-        nameFilm: 'O Senhor dos anéis'
-      },
-      {
-        idFilm: 2,
-        nameFilm: 'O Hobbit 1' 
-      },
-      {
-        idFilm: 3,
-        nameFilm: 'Os Vingadores' 
-      },
-      {
-        idFilm: 4,
-        nameFilm: 'A Origem' 
-      },
-    ];
     this.getFilms();
   },
 };
 </script>
 <style scoped>
+.linkFilm {
+  color: #fff;
+  text-decoration: none;
+}
 .btnAllFilms {
   color: #141414;
   font-weight: 300;
@@ -138,7 +108,8 @@ export default {
   text-align: left;
 }
 .itemFilm {
-  background-color: #fff;
+  background-position: center;
+  background-size: cover;
   padding: 36px;
   border-radius: 25px;
   align-items: center;
