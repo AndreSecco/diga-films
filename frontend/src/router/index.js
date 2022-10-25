@@ -10,6 +10,8 @@ import FilmsView from '../views/Panel/FilmsView.vue'
 import TagsView from '../views/Panel/TagsView.vue'
 import NewFilmView from '../views/Panel/NewFilmView.vue'
 import UpdateFilmView from '../views/Panel/UpdateFilmView.vue'
+import SingleTagView from '../views/Tags/SingleTagView.vue'
+import SingleFilmView from '../views/Films/SingleFilmView.vue'
 
 
 const routes = [
@@ -68,9 +70,19 @@ const routes = [
     component: NewFilmView
   },
   {
-    path:'/account/updatefilm',
+    path:'/account/updatefilm/:idFilm',
     name: 'updatefilm',
     component: UpdateFilmView
+  },
+  {
+    path:'/singletag/:id',
+    name: 'singletag',
+    component: SingleTagView
+  },
+  {
+    path:'/singlefilm/:id',
+    name: 'singlefilm',
+    component: SingleFilmView
   },
 ]
 
