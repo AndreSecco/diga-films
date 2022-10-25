@@ -6,8 +6,8 @@
         <div class="titleAccount col-7">
           <h1>Sua Conta</h1>
         </div>
-        <button class="btn btnAccount col-2">Alterar</button>
-        <button class="btn btnAccount col-2">Cancelar</button>
+        <!-- <button class="btn btnAccount col-2">Alterar</button>
+        <button class="btn btnAccount col-2">Cancelar</button> -->
       </div>
       <div class="contentAccount">
         <div class="form-floating">

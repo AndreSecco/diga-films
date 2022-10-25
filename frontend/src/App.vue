@@ -25,4 +25,26 @@ export default {
   text-align: center;
   color: #2c3e50;
 }
+  /* width */
+  ::-webkit-scrollbar {
+    width: 3px;
+    height: 3px
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 3px white;
+    border-radius: 3px;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #a4a4a4;
+    border-radius: 3px;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #a4a4a4;
+  }
 </style>
