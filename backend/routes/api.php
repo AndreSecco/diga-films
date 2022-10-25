@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FilmController;
 use App\Http\Controllers\listFilmController;
+use App\Http\Controllers\TagController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -27,11 +28,22 @@ Route::delete('/delete{user}', [UserController::class, 'deleteUser'])->name('del
 
 // Routes of Films
 Route::get('/films', [FilmController::class, 'index'])->name('list-films');
+Route::get('/filmsasc', [FilmController::class, 'indexAsc'])->name('list-films-asc');
+Route::get('/filmsdesc', [FilmController::class, 'indexDesc'])->name('list-films-desc');
 Route::post('/addfilm', [FilmController::class, 'addFilm'])->name('add-film');
 Route::get('/editfilm/{id}', [FilmController::class, 'editFilm'])->name('edit-film');
 Route::put('/updatefilm/{id}', [FilmController::class, 'updateFilm'])->name('update-film');
 Route::delete('/deletefilm/{id}', [FilmController::class, 'deleteFilm'])->name('delete-film');
+Route::get('/filmcategory', [FilmController::class, 'filmCategory'])->name('film-category');
+Route::get('/singlefilm/{id}', [FilmController::class, 'singleFilm'])->name('single-film');
 
+// Route of Tags
+Route::get('/tags', [TagController::class, 'getTags'])->name('get-tags');
+Route::post('/addtag', [TagController::class, 'addTag'])->name('add-tag');
+Route::get('/singletag/{id}', [TagController::class, 'singleTag'])->name('single-tag');
+Route::get('edittag/{id}',  [TagController::class, 'editTag'])->name('edit-tag');
+Route::put('updatetag/{id}', [TagController::class, 'updateTag'])->name('update-tag');
+Route::delete('/deletetag/{id}', [TagController::class, 'deleteTag'])->name('delete-tag');
 
 Route::post('login', [AuthController::class, 'login']);
 
