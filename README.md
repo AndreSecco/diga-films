@@ -8,7 +8,9 @@ Abaixo existe o passo a passo de como baixar o sistema Diga_Films e fazer ele fu
 Após fazer o clone deste repositório em seu computador, primeiramente vamos configurar seu backend, então crie um banco de dados MySql em seu localhost com nome de "diga_films". 
 Perfeito agora para direcionar o projeto a este banco, entra no arquivo .env e altere a linha "DB_DATABASE=diga_films" desta forma. 
 Com o banco criado e direcionado agora entre na pasta backend e rode os seguintes comandos:
-- npm install
+
+Rode este comando para instalar as dependencias do projeto
+- composer install --no-scripts
 
 - npm install axios
 
