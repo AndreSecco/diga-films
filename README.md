@@ -37,7 +37,7 @@ em outro terminal entre na pasta backend e execute: php artisan serve
 
 Agora você poderá acessar seu navegador e inserir o seguinte link: http://localhost:8081/
 
-Agora você terá acesso a plataforma completa :D 
+Agora você terá acesso a plataforma completa &#128512;
 
 Qualquer dúvida ou questão eu estou a disposição.
 Abraços.
