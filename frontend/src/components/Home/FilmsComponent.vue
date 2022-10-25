@@ -63,12 +63,9 @@ export default {
     async getFilms() {
       const reqFilms = await fetch(`http://127.0.0.1:8000/api/films`);
       const dataFilms = await reqFilms.json();
-      for (let i = 0; i < 4; i++) {
-        this.listFilms.push(dataFilms[i]);
-      }
-      for (let index = 0; index <= 6; index++) {
-        this.listFilmPrefer.push(dataFilms[index]);
-      }
+      this.listFilms = dataFilms
+      this.listFilmPrefer = dataFilms
+
     },
   },
   created() {
